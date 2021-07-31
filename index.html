@@ -1,0 +1,74 @@
+<!doctype html>
+<title>Example</title>
+<style>
+body { 
+  padding: 20px;
+  display: grid;
+  grid-template-areas: 
+    "header header header"
+    "nav article ads"
+    "footer footer footer";
+  grid-template-rows: 60px 1fr 60px;
+  grid-template-columns: 20% 1fr 15%;
+  grid-gap: 10px;
+  height: 100vh;
+  margin: 0;
+  }
+header, footer, article, nav, div {
+  padding: 20px;
+  background: gray;
+}
+#pageHeader {
+  grid-area: header;
+}
+#pageFooter {
+  grid-area: footer;
+}
+#mainArticle { 
+  grid-area: article;      
+  }
+#mainNav { 
+  grid-area: nav; 
+  }
+#siteAds { 
+  grid-area: ads; 
+  }
+
+  #div1, #div2 {
+  float: left;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+}
+</style>
+<script>
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+}
+</script>
+<body>
+  <header id="pageHeader">Header</header>
+  <article id="mainArticle">
+    
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <p draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31" >Drage Me</p>
+      <img src="./img/1.jpg" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31">
+    </div>
+    <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  </article>
+  <nav id="mainNav">Nav</nav>
+  <div id="siteAds">Ads</div>
+  <footer id="pageFooter">Footer</footer>
+</body>
